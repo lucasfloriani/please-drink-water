@@ -2,9 +2,11 @@
   "name": "please-drink-water",
   "version": "1.0.0",
   "description": "Discord bot to alert the users to drink water",
-  "main": "./src/index.js",
+  "main": "./src/index.ts",
   "scripts": {
-    "start": "node ./src/index.js"
+    "dev": "nodemon src/index.ts",
+    "prebuild": "rimraf dist",
+    "build": "sucrase ./src -d ./dist --transforms typescript,imports"
   },
   "keywords": [],
   "author": "Lucas Alexander Floriani <lucas.floriane@gmail.com>",
@@ -12,5 +14,12 @@
   "dependencies": {
     "discord.js": "^12.2.0",
     "dotenv": "^8.2.0"
+  },
+  "devDependencies": {
+    "@types/node": "^14.0.11",
+    "nodemon": "^2.0.4",
+    "rimraf": "^3.0.2",
+    "sucrase": "^3.15.0",
+    "typescript": "^3.9.5"
   }
 }

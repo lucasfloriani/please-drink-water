@@ -3,4 +3,4 @@ const ActionsName = Object.freeze({
   ChangeTimeByHours: 'hours',
 })
 
-module.exports = ActionsName
+export default ActionsName

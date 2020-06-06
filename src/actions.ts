@@ -1,12 +1,13 @@
-const ActionsName = require('./enums/actions')
-const { isBetween, stringToInt } = require('./helpers/common')
-const { getCommandValue, sendMessage } = require('./helpers/message')
+import { Message } from 'discord.js'
+import ActionsName from './enums/actions'
+import { isBetween, stringToInt } from './helpers/common'
+import { getCommandValue, sendMessage } from './helpers/message'
 
-let intervalRef
+let intervalRef: ReturnType<typeof setTimeout>
 const minuteInterval = 1000 * 60
 const hourInterval = 1000 * 60 * 60
 
-const setTimeByMinutes = (message) => {
+export const setTimeByMinutes = (message: Message) => {
   const commandValue = getCommandValue(message, ActionsName.ChangeTimeByMinutes)
   const minutes = stringToInt(commandValue)
   if (!isBetween(minutes, 1, 60)) {
@@ -18,7 +19,7 @@ const setTimeByMinutes = (message) => {
   sendMessage(message, 'Interval of messages have been changed')
 }
 
-const setTimeByHours = (message) => {
+export const setTimeByHours = (message: Message) => {
   const commandValue = getCommandValue(message, ActionsName.ChangeTimeByHours)
   const hours = stringToInt(commandValue)
   if (!isBetween(hours, 1, 5)) {
@@ -30,12 +31,7 @@ const setTimeByHours = (message) => {
   sendMessage(message, 'Interval of messages have been changed')
 }
 
-const configureWaterMessageInterval = (message, time) => {
+const configureWaterMessageInterval = (message: Message, time: number) => {
   if (intervalRef) clearInterval(intervalRef)
   intervalRef = setInterval(() => sendMessage(message, '@everyone Please Drink Water!'), time)
-}
-
-module.exports = {
-  setTimeByMinutes,
-  setTimeByHours,
 }

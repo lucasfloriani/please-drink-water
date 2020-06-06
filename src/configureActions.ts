@@ -1,8 +1,9 @@
-const ActionsName = require('./enums/actions')
-const { setTimeByMinutes, setTimeByHours } = require('./actions')
-const { checkCommandFromMessage, haveUsedPrefix, haveAdminPermission } = require('./helpers/message')
+import { Message } from 'discord.js'
+import ActionsName from './enums/actions'
+import { setTimeByMinutes, setTimeByHours } from './actions'
+import { checkCommandFromMessage, haveUsedPrefix, haveAdminPermission } from './helpers/message'
 
-const waterActions = (message) => {
+const waterActions = (message: Message) => {
   if (!haveUsedPrefix(message)) return
   if (!haveAdminPermission(message)) {
     message.channel.send("You don't have administrator permission to use this command!")
@@ -20,4 +21,4 @@ const waterActions = (message) => {
   }
 }
 
-module.exports = waterActions
+export default waterActions
