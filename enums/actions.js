@@ -1,6 +1,6 @@
 const ActionsName = Object.freeze({
-  ChangeTimeByMinutes: 'time-minutes',
-  ChangeTimeByHours: 'time-hours',
+  ChangeTimeByMinutes: 'minutes',
+  ChangeTimeByHours: 'hours',
 })
 
-module.export = ActionsName
+module.exports = ActionsName
