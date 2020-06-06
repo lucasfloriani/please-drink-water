@@ -11,13 +11,20 @@ const waterActions = (message) => {
     message.channel.send("You don't have administrator permission to use this command!")
     return
   }
+
   const isCommand = checkCommandFromMessage(message)
-  if (isCommand(ActionsName.ChangeTimeByMinutes)) setTimeByMinutes(message)
-  if (isCommand(ActionsName.ChangeTimeByHours)) setTimeByHours(message)
+  if (isCommand(ActionsName.ChangeTimeByMinutes)) {
+    setTimeByMinutes(message)
+    return
+  }
+  if (isCommand(ActionsName.ChangeTimeByHours)) {
+    setTimeByHours(message)
+    return
+  }
 }
 
-const checkCommandFromMessage = message => commandName => {
-  return message.content.startsWith(`${process.env.DISCORD_BOT_TOKEN} ${commandName}`)
+const checkCommandFromMessage = (message) => (commandName) => {
+  return message.content.startsWith(`${process.env.DISCORD_BOT_PREFIX} ${commandName}`)
 }
 
 const setTimeByMinutes = (message) => {
@@ -29,6 +36,7 @@ const setTimeByMinutes = (message) => {
   }
   const intervalTime = minutes * minuteInterval
   configureWaterMessageInterval(message, intervalTime)
+  sendMessage(message, 'Interval of messages have been changed')
 }
 
 const setTimeByHours = (message) => {
@@ -40,6 +48,7 @@ const setTimeByHours = (message) => {
   }
   const intervalTime = hours * hourInterval
   configureWaterMessageInterval(message, intervalTime)
+  sendMessage(message, 'Interval of messages have been changed')
 }
 
 const configureWaterMessageInterval = (message, time) => {
@@ -48,12 +57,12 @@ const configureWaterMessageInterval = (message, time) => {
 }
 
 const getCommandValue = (message, command) => {
-  const [_, commandValue] = message.content.split(`${process.env.DISCORD_BOT_TOKEN} ${command}`)
+  const [_, commandValue] = message.content.split(`${process.env.DISCORD_BOT_PREFIX} ${command}`)
   return commandValue
 }
 
 const haveAdminPermission = message => message.member.hasPermission(['ADMINISTRATOR'])
-const haveUsedPrefix = message => message.content.startsWith(process.env.DISCORD_BOT_TOKEN)
+const haveUsedPrefix = message => message.content.startsWith(process.env.DISCORD_BOT_PREFIX)
 const sendMessage = (message, text) => message.channel.send(text)
 
 module.exports = waterActions
