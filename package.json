@@ -4,7 +4,7 @@
   "description": "Discord bot to alert the users to drink water",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node ./index.js"
   },
   "keywords": [],
   "author": "Lucas Alexander Floriani <lucas.floriane@gmail.com>",
