@@ -4,18 +4,22 @@
   "description": "Discord bot to alert the users to drink water",
   "main": "./src/index.ts",
   "scripts": {
+    "start": "node dist/index.js",
     "dev": "nodemon src/index.ts",
     "prebuild": "rimraf dist",
-    "build": "sucrase ./src -d ./dist --transforms typescript,imports"
+    "build": "sucrase ./src -d ./dist --transforms typescript,imports",
+    "postinstall": "npm run build"
   },
   "keywords": [],
   "author": "Lucas Alexander Floriani <lucas.floriane@gmail.com>",
   "license": "MIT",
   "dependencies": {
     "discord.js": "^12.2.0",
-    "dotenv": "^8.2.0"
+    "dotenv": "^8.2.0",
+    "koa": "^2.13.0"
   },
   "devDependencies": {
+    "@types/koa": "^2.11.3",
     "@types/node": "^14.0.11",
     "nodemon": "^2.0.4",
     "rimraf": "^3.0.2",
